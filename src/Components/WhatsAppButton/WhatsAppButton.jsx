@@ -1,5 +1,5 @@
 const WhatsAppButton = () => {
-    const phoneNumber = "201013243373"; // ضع رقم واتساب هنا بدون +
+    const phoneNumber = "201013243373"; 
 
     const handleClick = () => {
         window.open(`https://wa.me/${phoneNumber}`, "_blank");

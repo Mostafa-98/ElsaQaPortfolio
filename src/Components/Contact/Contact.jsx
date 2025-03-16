@@ -32,7 +32,7 @@ const Contact = () => {
             <p className="text-base md:text-lg text-center text-[#222222] dark:text-gray-400">
               Phone : 01013243373
             </p>
-            <a href="https://wa.me/01004750886"
+            <a href="https://wa.me/201013243373"
               className="font-extrabold text-gray-900 hover:text-white border-2 hover:border-[#F4EFED] bg-[#F4EFED] border-gray-800 hover:bg-[#222222] focus:ring-4 text tracking-widest uppercase focus:outline-none focus:ring-gray-300 rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-[#F4EFED] dark:text-gray-400 dark:hover:text-white dark:hover:bg-[#222222] dark:focus:ring-gray-800"
               target="_blank">
               <button>Chat With Me </button>
