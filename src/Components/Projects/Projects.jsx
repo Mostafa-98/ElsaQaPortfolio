@@ -85,7 +85,7 @@ const Projects = () => {
               More WORKS
             </h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              <a href="https://mostafa-98.github.io/First-React/">
+              <a href="https://mostafa-98.github.io/Random-Quotes-Project/">
                 <div className="relative group">
                   <div className="bg-black border rounded-lg w-full h-full absolute flex justify-center items-center opacity-90 transition-opacity duration-500 group-hover:opacity-0">
                     <h1 className="py-6 italic font-extrabold text-white text-center text-2xl md:text-3xl uppercase">
