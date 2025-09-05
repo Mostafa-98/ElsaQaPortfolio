@@ -12,7 +12,7 @@ import smart from "../../assets/images/smartLogin.png";
 import weather from "../../assets/images/weatherProj.png";
 import Projects from './../Projects/Projects';
 import contactImg from './../../assets/images/make-contact-resized.png'
-import mypic from './../../assets/images/mypic-circle.jpeg'
+import mypic from './../../assets/images/Newpic.jpg'
 import Contact from '../Contact/Contact';
 
 const Home = () => {
@@ -28,7 +28,7 @@ const Home = () => {
         <div className=' container mx-auto flex text-center justify-center items-center h-full'>
           <div className=" mt-10 flex flex-col justify-center items-center  border-gray-200 rounded-lg shadow-sm dark:bg-[#222222] dark:border-gray-700">
             <a href="#" className=' '>
-              <img className=" w-[200px]  rounded-full text-center" src={mypic} alt="" />
+              <img className=" w-[200px]  rounded-full text-center" src={mypic + "?v=2"} alt="" />git
             </a>
             <div className="p-5 text-center">
               <a href="#">
