@@ -12,7 +12,7 @@ import smart from "../../assets/images/smartLogin.png";
 import weather from "../../assets/images/weatherProj.png";
 import Projects from './../Projects/Projects';
 import contactImg from './../../assets/images/make-contact-resized.png'
-import mypic from './../../assets/images/Newpic.jpg'
+import mypic from './../../assets/images/mypic-circle.jpeg'
 import Contact from '../Contact/Contact';
 
 const Home = () => {
