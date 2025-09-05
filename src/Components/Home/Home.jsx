@@ -19,12 +19,16 @@ const Home = () => {
   return (
     <>
 
+
+      {/* hello my name is moustafa */}
+
+
       {/*  Header Section  */}
       <div className=' h-screen bg-[#F4EFED] dark:bg-[#222222]'>
         <div className=' container mx-auto flex text-center justify-center items-center h-full'>
           <div className=" mt-10 flex flex-col justify-center items-center  border-gray-200 rounded-lg shadow-sm dark:bg-[#222222] dark:border-gray-700">
             <a href="#" className=' '>
-              <img className=" w-[200px]  rounded-full text-center" src={mypic}  alt="" />
+              <img className=" w-[200px]  rounded-full text-center" src={mypic} alt="" />
             </a>
             <div className="p-5 text-center">
               <a href="#">
