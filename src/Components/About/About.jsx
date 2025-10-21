@@ -1,49 +1,143 @@
-import React from 'react'
-import globe from './../../assets/images/globe.png'
+import React from "react";
+import { motion } from "framer-motion";
+import globe from "./../../assets/images/globe.png";
 
 const About = () => {
   return (
-    <>
+    <section
+      id="about"
+      className="relative flex flex-col md:flex-row justify-center items-center bg-[#F4EFED] dark:bg-[#111111] dark:text-[#F4EFED] px-6 py-16 md:py-24 overflow-hidden"
+    >
+      {/* خلفية خفيفة */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#00000005] to-[#00000010] dark:via-[#ffffff05] dark:to-[#ffffff10]" />
+      <div className="absolute -top-24 -right-32 w-[300px] h-[300px] bg-gradient-to-br from-[#a1c4fd]/20 to-[#c2e9fb]/10 blur-[120px] rounded-full" />
+      <div className="absolute -bottom-24 -left-32 w-[300px] h-[300px] bg-gradient-to-br from-[#ff9a9e]/20 to-[#fad0c4]/10 blur-[120px] rounded-full" />
 
+      <div className="container max-w-6xl mx-auto relative z-10">
+        {/* العنوان */}
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-3xl md:text-5xl font-extrabold text-center uppercase mb-10 md:mb-16 text-[#222222] dark:text-[#F4EFED]"
+        >
+          About Me
+        </motion.h1>
 
+        <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
+          {/* الصورة */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="w-full md:w-[40%] flex justify-center"
+          >
+            <img
+              src={globe}
+              alt="About Illustration"
+              className="rounded-3xl shadow-2xl w-[80%] md:w-[100%] object-cover"
+            />
+          </motion.div>
 
-      <section className='flex flex-col  justify-center items-center md:flex-row bg-[#F4EFED] dark:text-[#F4EFED] dark:bg-[#222222] overflow-hidden'>
-        <div className='container md:w-[60%] justify-center items-center mx-auto'>
-          <div>
-            <h1 className="py-6 font-extrabold text-center text-3xl md:text-5xl justify-center items-center uppercase dark:text-[#F4EFED]">
-              about
-            </h1>
-          </div>
-          <div className="flex flex-col md:flex-row md:justify-around md:items-center md:px-4 md:py-4">
-            <img className="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src={globe} alt="" />
-            <div className=" w-1/2 flex flex-col justify-between p-4 leading-normal">
-              <h5 className="mb-2   tracking-tight text-gray-900 dark:text-[#F4EFED]">
-                <span className='text-xl font-extrabold'>Welcome, friend.</span> I’m a Moustafa Elsaqqa, freelance web developer  I’ve got a broad range of web related skills and specialise in <span className='text-xl font-extrabold'>front-end development.</span> The short version is – I know my onions code-wise, have an eye for aesthetics, and I know how to make high-quality websites from start to finish.
-              </h5>            </div>
-          </div>
+          {/* النص */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="w-full md:w-[60%] leading-relaxed text-gray-700 dark:text-gray-300 space-y-4"
+          >
+            <p className="text-lg">
+              <span className="font-extrabold text-xl dark:text-white text-[#222]">
+                Welcome, friend.
+              </span>{" "}
+              I’m <span className="font-bold">Moustafa Elsaqqa</span>, a
+              freelance <span className="font-bold">Web Developer</span> who
+              specializes in{" "}
+              <span className="font-bold text-blue-600 dark:text-blue-400">
+                front-end development
+              </span>
+              . I create modern, fast, and beautiful digital experiences from
+              scratch — blending design, performance, and code craftsmanship.
+            </p>
 
-          <div className='text-start'>
-            <h1 className='text-2xl py-5 font-extrabold'>My clients include:</h1>
+            <p>
+              I’ve worked with startups, agencies, and established tech
+              companies to build scalable React and Next.js applications. I’m
+              passionate about creating web interfaces that are both{" "}
+              <span className="font-bold">intuitive</span> and{" "}
+              <span className="font-bold">highly performant</span>.
+            </p>
 
-            <ul className='text-left list-disc '>
-              <li className='py-3'>Startups & Small Businesses that need a robust, scalable web presence. I specialize in crafting high-performance, modern React applications that not only look great but also drive business growth. Need a sleek landing page, a complex dashboard, or an interactive web app? I’ve got you covered.</li>
-              <li className='py-3'>Design Agencies that require a front-end specialist to bring their Figma or Sketch designs to life. I respect design down to the pixel and ensure that the final product is not only aesthetically faithful but also performant, accessible, and easy to use.</li>
-              <li className='py-3'>Tech Companies & SaaS Providers that need highly interactive, data-driven interfaces. Whether it’s an advanced UI, real-time updates, or complex state management, I create seamless experiences using React, Next.js, and modern front-end tools.</li>
-              <li className='py-3'>Nonprofits & Charities that need maintainable, user-friendly websites within budget constraints. I focus on accessibility, performance, and easy content management so they can focus on their mission instead of struggling with technology.</li>
-              <li className='py-3'>Beyond the fundamentals, I have experience working with animations, micro-interactions, data visualization, and WebGL for immersive user experiences. I’m always exploring new front-end technologies to push the boundaries of what’s possible on the web.</li>
-            </ul>
-            <ul className='text-left'>
-              <li className='py-4'>Recently, I spent time developing interactive dashboards and web applications for a SaaS company, working closely with designers and product teams to refine user experiences. I’ve also contributed to open-source projects and built dynamic web tools that help businesses automate and optimize workflows.</li>
-              <li className='py-4'>My skills as a React developer go beyond writing code—I focus on problem-solving, usability, and performance optimization. Every project is built with scalability and maintainability in mind, ensuring long-term value for clients.</li>
-              <li className='py-4'>In my spare time, I enjoy experimenting with creative coding, exploring 3D graphics in the browser, and contributing to front-end development communities. Currently, I’m working on a React-powered indie project that blends animation and interactivity to create engaging digital experiences.</li>
-              <li className='py-4'>If you need a front-end React developer who can turn your ideas into polished, high-quality web applications, let’s connect!</li>
-            </ul>
-          </div>
+            <p>
+              My expertise includes animation, micro-interactions, data
+              visualization, and delivering pixel-perfect implementations from
+              Figma or design systems like MUI. I’m also experienced in managing
+              complex app states, optimizing rendering, and improving UX flow.
+            </p>
+
+            <p>
+              Beyond coding, I love exploring creative technology — from 3D
+              graphics with Three.js to interactive storytelling on the web.
+            </p>
+
+            <p className="font-semibold text-[#222222] dark:text-[#F4EFED] mt-4">
+              If you’re looking for a React/Next.js developer who can turn your
+              vision into a polished, high-quality experience — let’s build
+              something great together 🚀
+            </p>
+          </motion.div>
         </div>
-      </section>
 
-    </>
-  )
-}
+        {/* Clients Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="mt-16"
+        >
+          <h2 className="text-2xl md:text-3xl font-extrabold mb-6 text-[#222222] dark:text-[#F4EFED]">
+            My Clients Include:
+          </h2>
+          <ul className="list-disc pl-6 space-y-4 text-gray-700 dark:text-gray-300">
+            <li>
+              <strong>Startups & Small Businesses:</strong> Robust, scalable web
+              apps built with React and Tailwind — from landing pages to complex
+              dashboards.
+            </li>
+            <li>
+              <strong>Design Agencies:</strong> Pixel-perfect conversions from
+              Figma/Sketch with strong focus on performance and accessibility.
+            </li>
+            <li>
+              <strong>Tech Companies & SaaS Providers:</strong> Interactive
+              interfaces, real-time data updates, and seamless user experience
+              with React + Next.js.
+            </li>
+            <li>
+              <strong>Nonprofits & Charities:</strong> Affordable, accessible
+              websites that empower their mission and community reach.
+            </li>
+          </ul>
+        </motion.div>
 
-export default About
+        {/* Closing Statement */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mt-12 text-center text-gray-600 dark:text-gray-400 italic"
+        >
+          “Every line of code should tell a story — clean, purposeful, and
+          inspiring.”
+        </motion.p>
+      </div>
+    </section>
+  );
+};
+
+export default About;

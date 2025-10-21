@@ -1,149 +1,166 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
+  const location = useLocation();
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to control menu visibility
-  const location = useLocation(); // Get the current route
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Sync with theme or system preference
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      setIsDarkMode(savedTheme === "dark");
+      document.documentElement.classList.toggle("dark", savedTheme === "dark");
+    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      setIsDarkMode(true);
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
 
   const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    if (!isDarkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    setIsDarkMode(prev => {
+      const newMode = !prev;
+      document.documentElement.classList.toggle("dark", newMode);
+      localStorage.setItem("theme", newMode ? "dark" : "light");
+      return newMode;
+    });
   };
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen); // Toggle menu visibility
-  };
+  const toggleMenu = () => setIsMenuOpen(prev => !prev);
+
+  const navLinks = [
+    { path: "/", label: "Home" },
+    { path: "/about", label: "About" },
+    { path: "/projects", label: "Projects" },
+    { path: "/contact", label: "Contact" },
+  ];
+
+  const SunIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+      <path d="M10 15a5 5 0 100-10 5 5 0 000 10zM10 0v2M10 18v2M0 10h2M18 10h2M3.22 3.22l1.42 1.42M15.36 15.36l1.42 1.42M3.22 16.78l1.42-1.42M15.36 4.64l1.42-1.42" />
+    </svg>
+  );
+
+  const MoonIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+      <path d="M17.8 13.75a1 1 0 00-.86-.5A7.49 7.49 0 0110.52 2a1 1 0 00-.83-1.5h-.12a9.5 9.5 0 108.23 14.25 1 1 0 00.004-.99z" />
+    </svg>
+  );
 
   return (
-    <nav className="bg-[#F4EFED] dark:bg-[#222222] w-full z-20 top-0 start-0 text-[#222222] border-gray-200 dark:border-[#222222]">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <Link to={"/"} className="flex items-center space-x-3 rtl:space-x-reverse">
-          <span className="self-center text-[#222222] whitespace-nowrap text-3xl font-extrabold dark:text-white">
+    <nav className="fixed top-0 left-0 w-full bg-[#F4EFED]/90 dark:bg-[#1C1C1C]/90 backdrop-blur-md shadow-md z-50 transition-colors duration-300">
+      <div className="max-w-screen-xl mx-auto flex items-center justify-between px-4 py-3 md:py-4">
+        {/* Logo */}
+        <Link to="/" className="flex items-center space-x-2">
+          <span className="text-3xl font-extrabold tracking-wide text-[#222] dark:text-[#F4EFED]">
             ElsaQa
           </span>
         </Link>
-        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+
+        {/* Dark Mode & Mobile Menu */}
+        <div className="flex items-center gap-4 md:order-2">
           <button
             onClick={toggleDarkMode}
-            type="button"
             aria-label="Toggle dark mode"
-            className="flex items-center w-9 h-9 justify-center text-xs font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-500 dark:bg-gray-800 focus:outline-none dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+            className="w-9 h-9 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-600
+                       bg-white dark:bg-[#222] text-gray-700 dark:text-gray-300 hover:scale-110 transition-transform duration-300"
           >
-            {isDarkMode ? (
-              <svg
-                data-toggle-icon="sun"
-                className="w-3.5 h-3.5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path d="M10 15a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0-11a1 1 0 0 0 1-1V1a1 1 0 0 0-2 0v2a1 1 0 0 0 1 1Zm0 12a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1ZM4.343 5.757a1 1 0 0 0 1.414-1.414L4.343 2.929a1 1 0 0 0-1.414 1.414l1.414 1.414Zm11.314 8.486a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414ZM4 10a1 1 0 0 0-1-1H1a1 1 0 0 0 0 2h2a1 1 0 0 0 1-1Zm15-1h-2a1 1 0 1 0 0 2h2a1 1 0 0 0 0-2ZM4.343 14.243l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414a1 1 0 0 0-1.414-1.414ZM14.95 6.05a1 1 0 0 0 .707-.293l1.414-1.414a1 1 0 1 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 .707 1.707Z"></path>
-              </svg>
-            ) : (
-              <svg
-                data-toggle-icon="moon"
-                className="w-3.5 h-3.5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 18 20"
-              >
-                <path d="M17.8 13.75a1 1 0 0 0-.859-.5A7.488 7.488 0 0 1 10.52 2a1 1 0 0 0 0-.969A1.035 1.035 0 0 0 9.687.5h-.113a9.5 9.5 0 1 0 8.222 14.247 1 1 0 0 0 .004-.997Z"></path>
-              </svg>
-            )}
-            <span className="sr-only">Toggle dark/light mode</span>
+            {isDarkMode ? <SunIcon /> : <MoonIcon />}
           </button>
-        </div>
-        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+
+          {/* Mobile Menu Button */}
           <button
             onClick={toggleMenu}
-            data-collapse-toggle="navbar-sticky"
-            type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-[#222222] focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-[#F4EFED] dark:focus:ring-gray-600"
-            aria-controls="navbar-sticky"
-            aria-expanded={isMenuOpen}
+            className="md:hidden text-[#222] dark:text-[#F4EFED] p-2 rounded-md hover:bg-[#222]/10 dark:hover:bg-[#F4EFED]/10 transition-colors"
           >
-            <span className="sr-only">Open main menu</span>
             <svg
-              className="w-5 h-5"
-              aria-hidden="true"
+              className="w-6 h-6"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
-              viewBox="0 0 17 14"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
             >
-              <title>Open main menu</title>
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 1h15M1 7h15M1 13h15"
-              />
+              {isMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              )}
             </svg>
           </button>
         </div>
-        <div
-          className={`items-center justify-between ${
-            isMenuOpen ? "flex" : "hidden"
-          } w-full md:flex md:w-auto md:order-1`}
-          id="navbar-sticky"
-        >
-          <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:bg-[#222222] md:dark:bg-[#222222] dark:border-gray-700">
-            <li>
-              <Link
-                to="/"
-                className={`hover:scale-110 font-extrabold text-xl transition-all block py-2 px-3 ${
-                  location.pathname === "/" ? "border-b-2 border-[#F4EFED]" : ""
-                } text-[#222222] md:p-0 dark:text-[#F4EFED]`}
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/about"
-                className={`hover:scale-110 font-extrabold text-xl transition-all block py-2 px-3 ${
-                  location.pathname === "/about"
-                    ? "border-b-2 border-[#F4EFED]"
-                    : ""
-                } text-[#222222] md:p-0 dark:text-[#F4EFED]`}
-              >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/projects"
-                className={`hover:scale-110 font-extrabold text-xl transition-all block py-2 px-3 ${
-                  location.pathname === "/projects"
-                    ? "border-b-2 border-[#F4EFED]"
-                    : ""
-                } text-[#222222] md:p-0 dark:text-[#F4EFED]`}
-              >
-                Projects
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/contact"
-                className={`hover:scale-110 font-extrabold text-xl transition-all block py-2 px-3 ${
-                  location.pathname === "/contact"
-                    ? "border-b-2 border-[#F4EFED]"
-                    : ""
-                } text-[#222222] md:p-0 dark:text-[#F4EFED]`}
-              >
-                Contact
-              </Link>
-            </li>
+
+        {/* Desktop Links */}
+        <div className="hidden md:flex md:items-center md:space-x-8 md:order-1">
+          <ul className="flex items-center text-center font-semibold text-lg tracking-wide">
+            {navLinks.map((link) => (
+              <li key={link.path} className="relative group">
+                <Link
+                  to={link.path}
+                  className={`block py-3 md:py-0 px-3 transition-colors duration-300
+                    ${location.pathname === link.path
+                      ? "text-[#222] dark:text-[#F4EFED]"
+                      : "text-gray-700 dark:text-gray-400"
+                    } hover:text-[#222] dark:hover:text-[#F4EFED]`}
+                >
+                  {link.label}
+                  {/* Animated underline */}
+                  <AnimatePresence>
+                    {location.pathname === link.path && (
+                      <motion.span
+                        layoutId="underline"
+                        className="absolute bottom-0 left-0 w-full h-[2px] bg-[#222] dark:bg-[#F4EFED]"
+                        initial={{ width: 0 }}
+                        animate={{ width: "100%" }}
+                        exit={{ width: 0 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    )}
+                  </AnimatePresence>
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            className="fixed inset-0 bg-black/40 z-40 md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <motion.div
+              className="fixed top-0 right-0 w-64 h-full bg-[#F4EFED] dark:bg-[#1C1C1C] shadow-xl p-6 z-50 flex flex-col"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              onClick={e => e.stopPropagation()} // prevent closing when clicking inside menu
+            >
+              <ul className="flex flex-col gap-6 mt-10 font-semibold text-lg">
+                {navLinks.map((link) => (
+                  <li key={link.path}>
+                    <Link
+                      to={link.path}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`block text-[#222] dark:text-[#F4EFED] hover:text-[#555] dark:hover:text-[#ccc] transition-colors`}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };
