@@ -1,19 +1,18 @@
 import Navbar from './../Nav/Navbar';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Footer from './../Footer/Footer';
+import { useEffect } from 'react';
 
 const Layout = () => {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo({ top: 0 }); }, [pathname]);
   return (
-      <>
-      
-          
-          <Navbar />
+    <>
+      <Navbar />
+      <main className="pt-0"><Outlet /></main>
+      <Footer />
+    </>
+  );
+};
 
-          <Outlet />
-
-          <Footer />
-      </>
-  )
-}
-
-export default Layout
+export default Layout;

@@ -1,44 +1,25 @@
 import React from "react";
-import { motion } from "framer-motion";
-import HomeSlider from "../HomeSilder/HomeSlider";
+import { Link } from "react-router-dom";
+import { FiArrowRight } from "react-icons/fi";
+import Reveal from "../Reveal";
+import ProjectCard from "../ProjectCard";
+import projects from "../projects";
 
 export default function ProjectsSection() {
   return (
-    <section
-      id="projects"
-      className="py-24 bg-[#F4EFED] dark:bg-[#1C1C1C] text-center px-6 relative overflow-hidden"
-    >
-      {/* subtle background pattern */}
-      <div className="absolute inset-0 opacity-[0.04] bg-[url('https://www.toptal.com/designers/subtlepatterns/patterns/dots.png')]"></div>
-
-      <motion.h2
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="relative z-10 text-4xl md:text-5xl font-extrabold uppercase text-[#222222] dark:text-[#F4EFED] mb-12 tracking-wide"
-      >
-        Featured <span className="text-primary">Projects</span>
-      </motion.h2>
-
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.8 }}
-        viewport={{ once: true }}
-        className="relative z-10 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-14 text-base md:text-lg"
-      >
-        Here’s a quick look at some of the projects I’ve built — blending clean UI, smooth UX, and modern front-end tech.
-      </motion.p>
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        <HomeSlider />
-      </motion.div>
+    <section id="projects" className="section">
+      <div className="wrap">
+        <Reveal className="flex flex-wrap items-end justify-between gap-6">
+          <div className="max-w-2xl">
+            <span className="eyebrow">Featured projects</span>
+            <h2 className="h2">Things I've built, live and on GitHub.</h2>
+          </div>
+          <Link to="/projects" className="btn btn-ghost">All projects <FiArrowRight /></Link>
+        </Reveal>
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {projects.slice(0, 6).map((p, i) => <ProjectCard key={p.title} p={p} i={i} />)}
+        </div>
+      </div>
     </section>
   );
 }

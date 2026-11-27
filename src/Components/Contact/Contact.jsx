@@ -1,6 +1,14 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { FaEnvelope, FaLinkedin, FaGithub, FaWhatsapp } from "react-icons/fa";
+import { FiSend, FiArrowUpRight } from "react-icons/fi";
+import Reveal from "../Reveal";
+
+const contacts = [
+  { icon: <FaEnvelope />, label: "Email", value: "mostafaelsaqqa79@gmail.com", href: "mailto:mostafaelsaqqa79@gmail.com" },
+  { icon: <FaLinkedin />, label: "LinkedIn", value: "moustafa-elsaqqa", href: "https://www.linkedin.com/in/moustafa-elsaqqa/" },
+  { icon: <FaGithub />, label: "GitHub", value: "Mostafa-98", href: "https://github.com/Mostafa-98" },
+  { icon: <FaWhatsapp />, label: "WhatsApp", value: "Chat with me", href: "https://wa.me/201013243373" },
+];
 
 export default function ContactSection() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -11,151 +19,50 @@ export default function ContactSection() {
     const body = encodeURIComponent(`${form.message}\n\n${form.name}\n${form.email}`);
     window.location.href = `mailto:mostafaelsaqqa79@gmail.com?subject=${subject}&body=${body}`;
   };
-  const contacts = [
-    {
-      icon: <FaEnvelope className="text-2xl" />,
-      label: "Email",
-      href: "mailto:mostafaelsaqqa79@gmail.com",
-      color: "from-pink-500 to-red-500",
-    },
-    {
-      icon: <FaLinkedin className="text-2xl" />,
-      label: "LinkedIn",
-      href: "https://www.linkedin.com/in/moustafa-elsaqqa/",
-      color: "from-blue-500 to-cyan-500",
-    },
-    {
-      icon: <FaGithub className="text-2xl" />,
-      label: "GitHub",
-      href: "https://github.com/Mostafa-98",
-      color: "from-gray-700 to-gray-900",
-    },
-    {
-      icon: <FaWhatsapp className="text-2xl" />,
-      label: "WhatsApp",
-      href: "https://wa.me/201013243373",
-      color: "from-green-500 to-emerald-500",
-    },
-  ];
 
   return (
-    <section
-      id="contact"
-      className="relative py-24 px-6 bg-[#F4EFED] dark:bg-[#111111] text-center overflow-hidden"
-    >
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#00000005] to-[#00000010] dark:via-[#ffffff05] dark:to-[#ffffff10]" />
-
-      <motion.h2
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="relative text-3xl md:text-4xl font-extrabold uppercase text-[#222222] dark:text-[#F4EFED] mb-14 tracking-wide"
-      >
-        Let’s Connect
-      </motion.h2>
-
-      {/* Contact Form */}
-      <motion.form
-        onSubmit={onSubmit}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="relative max-w-2xl mx-auto bg-white dark:bg-[#1A1A1A] rounded-3xl shadow-lg p-8 md:p-10 text-left"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label className="block mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
-              Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              required
-              value={form.name}
-              onChange={onChange}
-              placeholder="Your name"
-              className="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#222222] dark:focus:ring-[#F4EFED]"
-            />
+    <section id="contact" className="section relative overflow-hidden">
+      <div className="aurora" />
+      <div className="wrap relative z-10">
+        <Reveal className="max-w-2xl">
+          <span className="eyebrow">Contact</span>
+          <h2 className="h2">Let's work together.</h2>
+          <p className="muted mt-4 text-lg">Have a page or a small app to build? Send a message and I'll get back to you.</p>
+        </Reveal>
+        <div className="mt-12 grid gap-8 lg:grid-cols-[.9fr_1.1fr]">
+          <div className="grid content-start gap-3">
+            {contacts.map((c, i) => (
+              <Reveal key={c.label} delay={i * 0.07} y={20}>
+                <a href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="card card-hover group flex items-center gap-4 p-4">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--accent)] to-[var(--accent2)] text-xl text-white">{c.icon}</span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-sm font-semibold">{c.label}</span>
+                    <span className="muted block truncate text-sm">{c.value}</span>
+                  </span>
+                  <FiArrowUpRight className="muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </a>
+              </Reveal>
+            ))}
           </div>
-          <div>
-            <label className="block mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              required
-              value={form.email}
-              onChange={onChange}
-              placeholder="Your email"
-              className="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#222222] dark:focus:ring-[#F4EFED]"
-            />
-          </div>
+          <Reveal>
+            <form onSubmit={onSubmit} className="card p-6 sm:p-8">
+              <div className="grid gap-5 sm:grid-cols-2">
+                <label className="block text-sm font-semibold">Name
+                  <input className="input mt-2 font-normal" type="text" name="name" required value={form.name} onChange={onChange} placeholder="Your name" />
+                </label>
+                <label className="block text-sm font-semibold">Email
+                  <input className="input mt-2 font-normal" type="email" name="email" required value={form.email} onChange={onChange} placeholder="you@example.com" />
+                </label>
+              </div>
+              <label className="mt-5 block text-sm font-semibold">Message
+                <textarea className="input mt-2 font-normal" name="message" required rows="6" value={form.message} onChange={onChange} placeholder="Tell me about your project..." />
+              </label>
+              <button type="submit" className="btn btn-primary mt-6 w-full">Send message <FiSend /></button>
+              <p className="muted mt-3 text-center text-xs">Opens your email app with the message ready to send.</p>
+            </form>
+          </Reveal>
         </div>
-
-        <div className="mt-6">
-          <label className="block mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
-            Message
-          </label>
-          <textarea
-            name="message"
-            required
-            value={form.message}
-            onChange={onChange}
-            rows="5"
-            placeholder="Write your message..."
-            className="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#222222] dark:focus:ring-[#F4EFED]"
-          />
-        </div>
-
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          type="submit"
-          className="mt-8 w-full py-3 rounded-xl bg-[#222222] dark:bg-[#F4EFED] text-[#F4EFED] dark:text-[#222222] font-semibold tracking-wide transition-all duration-300 hover:shadow-lg"
-        >
-          Send Message
-        </motion.button>
-      </motion.form>
-
-      {/* Contact Icons */}
-      <div className="relative flex flex-wrap justify-center gap-6 mt-16 max-w-3xl mx-auto">
-        {contacts.map((item, index) => (
-          <motion.a
-            key={index}
-            href={item.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.15, duration: 0.6 }}
-            viewport={{ once: true }}
-            className={`group relative flex flex-col items-center justify-center
-              w-[120px] h-[120px] rounded-2xl shadow-md bg-gradient-to-br ${item.color}
-              text-white overflow-hidden cursor-pointer transition-all duration-500`}
-          >
-            <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
-            <div className="mb-2">{item.icon}</div>
-            <span className="font-semibold tracking-wide text-sm">{item.label}</span>
-          </motion.a>
-        ))}
       </div>
-
-      {/* Call to action */}
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.8, duration: 0.8 }}
-        viewport={{ once: true }}
-        className="relative mt-12 text-gray-600 dark:text-gray-400 text-sm"
-      >
-        Prefer email? Write to mostafaelsaqqa79@gmail.com.
-      </motion.p>
     </section>
   );
 }

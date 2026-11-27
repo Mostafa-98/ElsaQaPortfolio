@@ -1,167 +1,96 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { FiSun, FiMoon, FiMenu, FiX } from "react-icons/fi";
+
+const navLinks = [
+  { path: "/", label: "Home" },
+  { path: "/about", label: "About" },
+  { path: "/projects", label: "Projects" },
+  { path: "/contact", label: "Contact" },
+];
 
 const Navbar = () => {
   const location = useLocation();
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDark, setIsDark] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  // Sync with theme or system preference
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      setIsDarkMode(savedTheme === "dark");
-      document.documentElement.classList.toggle("dark", savedTheme === "dark");
-    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setIsDarkMode(true);
-      document.documentElement.classList.add("dark");
-    }
+    const saved = localStorage.getItem("theme");
+    const dark = saved ? saved === "dark" : true;
+    setIsDark(dark);
+    document.documentElement.classList.toggle("dark", dark);
   }, []);
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(prev => {
-      const newMode = !prev;
-      document.documentElement.classList.toggle("dark", newMode);
-      localStorage.setItem("theme", newMode ? "dark" : "light");
-      return newMode;
-    });
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => { setOpen(false); }, [location.pathname]);
+
+  const toggle = () => {
+    const next = !isDark;
+    setIsDark(next);
+    document.documentElement.classList.toggle("dark", next);
+    localStorage.setItem("theme", next ? "dark" : "light");
   };
 
-  const toggleMenu = () => setIsMenuOpen(prev => !prev);
-
-  const navLinks = [
-    { path: "/", label: "Home" },
-    { path: "/about", label: "About" },
-    { path: "/projects", label: "Projects" },
-    { path: "/contact", label: "Contact" },
-  ];
-
-  const SunIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-      <path d="M10 15a5 5 0 100-10 5 5 0 000 10zM10 0v2M10 18v2M0 10h2M18 10h2M3.22 3.22l1.42 1.42M15.36 15.36l1.42 1.42M3.22 16.78l1.42-1.42M15.36 4.64l1.42-1.42" />
-    </svg>
-  );
-
-  const MoonIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-      <path d="M17.8 13.75a1 1 0 00-.86-.5A7.49 7.49 0 0110.52 2a1 1 0 00-.83-1.5h-.12a9.5 9.5 0 108.23 14.25 1 1 0 00.004-.99z" />
-    </svg>
-  );
-
   return (
-    <nav className="fixed top-0 left-0 w-full bg-[#F4EFED]/90 dark:bg-[#1C1C1C]/90 backdrop-blur-md shadow-md z-50 transition-colors duration-300">
-      <div className="max-w-screen-xl mx-auto flex items-center justify-between px-4 py-3 md:py-4">
-        {/* Logo */}
-        <Link to="/" className="flex items-center space-x-2">
-          <span className="text-3xl font-extrabold tracking-wide text-[#222] dark:text-[#F4EFED]">
-            ElsaQa
-          </span>
+    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3">
+      <nav
+        className={`mx-auto flex max-w-6xl items-center justify-between rounded-full border px-5 py-2.5 transition-all duration-300 ${
+          scrolled ? "border-[var(--border)] bg-[var(--bg)]/80 shadow-lg backdrop-blur-xl" : "border-transparent bg-transparent"
+        }`}
+      >
+        <Link to="/" className="font-display text-xl font-bold">
+          Elsa<span className="gradient-text">Qa</span>
         </Link>
 
-        {/* Dark Mode & Mobile Menu */}
-        <div className="flex items-center gap-4 md:order-2">
-          <button
-            onClick={toggleDarkMode}
-            aria-label="Toggle dark mode"
-            className="w-9 h-9 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-600
-                       bg-white dark:bg-[#222] text-gray-700 dark:text-gray-300 hover:scale-110 transition-transform duration-300"
-          >
-            {isDarkMode ? <SunIcon /> : <MoonIcon />}
-          </button>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={toggleMenu}
-            className="md:hidden text-[#222] dark:text-[#F4EFED] p-2 rounded-md hover:bg-[#222]/10 dark:hover:bg-[#F4EFED]/10 transition-colors"
-          >
-            <svg
-              className="w-6 h-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              {isMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
-        </div>
-
-        {/* Desktop Links */}
-        <div className="hidden md:flex md:items-center md:space-x-8 md:order-1">
-          <ul className="flex items-center text-center font-semibold text-lg tracking-wide">
-            {navLinks.map((link) => (
-              <li key={link.path} className="relative group">
-                <Link
-                  to={link.path}
-                  className={`block py-3 md:py-0 px-3 transition-colors duration-300
-                    ${location.pathname === link.path
-                      ? "text-[#222] dark:text-[#F4EFED]"
-                      : "text-gray-700 dark:text-gray-400"
-                    } hover:text-[#222] dark:hover:text-[#F4EFED]`}
-                >
-                  {link.label}
-                  {/* Animated underline */}
-                  <AnimatePresence>
-                    {location.pathname === link.path && (
-                      <motion.span
-                        layoutId="underline"
-                        className="absolute bottom-0 left-0 w-full h-[2px] bg-[#222] dark:bg-[#F4EFED]"
-                        initial={{ width: 0 }}
-                        animate={{ width: "100%" }}
-                        exit={{ width: 0 }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    )}
-                  </AnimatePresence>
+        <ul className="hidden items-center gap-1 md:flex">
+          {navLinks.map((l) => {
+            const active = location.pathname === l.path;
+            return (
+              <li key={l.path} className="relative">
+                <Link to={l.path} className={`relative block rounded-full px-4 py-2 text-sm font-medium transition-colors ${active ? "text-[var(--text)]" : "muted hover:text-[var(--text)]"}`}>
+                  {active && (
+                    <motion.span layoutId="navpill" className="absolute inset-0 -z-10 rounded-full border border-[var(--border)] bg-[var(--surface)]" transition={{ type: "spring", stiffness: 400, damping: 32 }} />
+                  )}
+                  {l.label}
                 </Link>
               </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+            );
+          })}
+        </ul>
 
-      {/* Mobile Menu Overlay */}
+        <div className="flex items-center gap-2">
+          <button onClick={toggle} aria-label="Toggle dark mode" className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] transition-transform hover:scale-110">
+            {isDark ? <FiSun /> : <FiMoon />}
+          </button>
+          <button onClick={() => setOpen((o) => !o)} aria-label="Menu" className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] md:hidden">
+            {open ? <FiX /> : <FiMenu />}
+          </button>
+        </div>
+      </nav>
+
       <AnimatePresence>
-        {isMenuOpen && (
+        {open && (
           <motion.div
-            className="fixed inset-0 bg-black/40 z-40 md:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setIsMenuOpen(false)}
+            initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
+            className="mx-auto mt-2 max-w-6xl rounded-3xl border border-[var(--border)] bg-[var(--bg)]/95 p-3 shadow-xl backdrop-blur-xl md:hidden"
           >
-            <motion.div
-              className="fixed top-0 right-0 w-64 h-full bg-[#F4EFED] dark:bg-[#1C1C1C] shadow-xl p-6 z-50 flex flex-col"
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              onClick={e => e.stopPropagation()} // prevent closing when clicking inside menu
-            >
-              <ul className="flex flex-col gap-6 mt-10 font-semibold text-lg">
-                {navLinks.map((link) => (
-                  <li key={link.path}>
-                    <Link
-                      to={link.path}
-                      onClick={() => setIsMenuOpen(false)}
-                      className={`block text-[#222] dark:text-[#F4EFED] hover:text-[#555] dark:hover:text-[#ccc] transition-colors`}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+            {navLinks.map((l) => (
+              <Link key={l.path} to={l.path} className={`block rounded-2xl px-4 py-3 font-medium ${location.pathname === l.path ? "bg-[var(--surface)]" : "muted"}`}>
+                {l.label}
+              </Link>
+            ))}
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </header>
   );
 };
 
