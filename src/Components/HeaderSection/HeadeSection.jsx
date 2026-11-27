@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function HeaderSection({ mypicture, onShowMore }) {
   return (
-    <section className="relative h-screen flex justify-center items-center overflow-hidden bg-gradient-to-b from-[#F4EFED] to-white dark:from-[#1c1c1c] dark:to-[#222222]">
+    <section className="relative min-h-screen py-24 flex justify-center items-center overflow-hidden bg-gradient-to-b from-[#F4EFED] to-white dark:from-[#1c1c1c] dark:to-[#222222]">
       {/* Background Accent */}
       <div className="absolute inset-0 flex justify-center items-center">
         <div className="w-[500px] h-[500px] bg-[#222222]/5 dark:bg-[#F4EFED]/5 blur-3xl rounded-full" />
@@ -23,7 +23,7 @@ export default function HeaderSection({ mypicture, onShowMore }) {
           <img
             className="relative w-[180px] sm:w-[220px] rounded-full shadow-2xl border-4 border-[#222222]/10 dark:border-[#F4EFED]/10 object-cover"
             src={mypicture}
-            alt="Moustafa Elsaqqa"
+            alt="Portrait of Moustafa Elsaqqa"
           />
         </motion.div>
 
@@ -74,6 +74,12 @@ export default function HeaderSection({ mypicture, onShowMore }) {
         >
           View My Work
         </motion.button>
+
+        <div className="mt-5 flex gap-5 text-sm font-medium text-gray-600 dark:text-gray-400">
+          <a href="https://github.com/Mostafa-98" target="_blank" rel="noopener noreferrer" className="hover:underline">GitHub</a>
+          <a href="https://www.linkedin.com/in/moustafa-elsaqqa/" target="_blank" rel="noopener noreferrer" className="hover:underline">LinkedIn</a>
+          <a href="mailto:mostafaelsaqqa79@gmail.com" className="hover:underline">Email</a>
+        </div>
 
         {/* Animated Arrow */}
         <motion.i

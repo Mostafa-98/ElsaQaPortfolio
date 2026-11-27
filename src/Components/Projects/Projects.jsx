@@ -130,8 +130,7 @@ export default function ProjectsSection() {
         viewport={{ once: true }}
         className="text-center mt-10 text-gray-700 dark:text-gray-400 text-sm"
       >
-        Each project is built with a focus on performance, design, and clean
-        code — crafted with passion 💻✨
+        Each project has a live demo. The source code is on GitHub.
       </motion.p>
     </section>
   );

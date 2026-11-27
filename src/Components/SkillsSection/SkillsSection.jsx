@@ -13,8 +13,6 @@ import {
   SiTailwindcss,
   SiJquery,
   SiTypescript,
-  SiNextdotjs,
-  SiMui,
 } from "react-icons/si";
 
 export default function SkillsSection() {
@@ -27,8 +25,6 @@ export default function SkillsSection() {
     { icon: <SiTailwindcss className="text-[#06B6D4]" />, label: "Tailwind" },
     { icon: <SiTypescript className="text-[#3178C6]" />, label: "TypeScript" },
     { icon: <FaReact className="text-[#61DAFB]" />, label: "React" },
-    { icon: <SiNextdotjs className="text-white dark:text-black" />, label: "Next.js" },
-    { icon: <SiMui className="text-[#007FFF]" />, label: "MUI" },
     { icon: <FaGitAlt className="text-[#E84E31]" />, label: "Git" },
     { icon: <FaGithub className="text-gray-200 dark:text-gray-700" />, label: "GitHub" },
   ];

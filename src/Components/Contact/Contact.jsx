@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FaEnvelope, FaLinkedin, FaGithub, FaWhatsapp } from "react-icons/fa";
 
 export default function ContactSection() {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(`Portfolio message from ${form.name}`);
+    const body = encodeURIComponent(`${form.message}\n\n${form.name}\n${form.email}`);
+    window.location.href = `mailto:mostafaelsaqqa79@gmail.com?subject=${subject}&body=${body}`;
+  };
   const contacts = [
     {
       icon: <FaEnvelope className="text-2xl" />,
@@ -50,6 +58,7 @@ export default function ContactSection() {
 
       {/* Contact Form */}
       <motion.form
+        onSubmit={onSubmit}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -63,6 +72,10 @@ export default function ContactSection() {
             </label>
             <input
               type="text"
+              name="name"
+              required
+              value={form.name}
+              onChange={onChange}
               placeholder="Your name"
               className="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#222222] dark:focus:ring-[#F4EFED]"
             />
@@ -73,6 +86,10 @@ export default function ContactSection() {
             </label>
             <input
               type="email"
+              name="email"
+              required
+              value={form.email}
+              onChange={onChange}
               placeholder="Your email"
               className="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#222222] dark:focus:ring-[#F4EFED]"
             />
@@ -84,6 +101,10 @@ export default function ContactSection() {
             Message
           </label>
           <textarea
+            name="message"
+            required
+            value={form.message}
+            onChange={onChange}
             rows="5"
             placeholder="Write your message..."
             className="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-transparent px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#222222] dark:focus:ring-[#F4EFED]"
@@ -93,7 +114,7 @@ export default function ContactSection() {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          type="button"
+          type="submit"
           className="mt-8 w-full py-3 rounded-xl bg-[#222222] dark:bg-[#F4EFED] text-[#F4EFED] dark:text-[#222222] font-semibold tracking-wide transition-all duration-300 hover:shadow-lg"
         >
           Send Message
@@ -133,7 +154,7 @@ export default function ContactSection() {
         viewport={{ once: true }}
         className="relative mt-12 text-gray-600 dark:text-gray-400 text-sm"
       >
-        Feel free to reach out — I’d love to connect with you 🤝
+        Prefer email? Write to mostafaelsaqqa79@gmail.com.
       </motion.p>
     </section>
   );

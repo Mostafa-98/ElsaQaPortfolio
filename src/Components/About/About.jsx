@@ -51,47 +51,38 @@ const About = () => {
           >
             <p className="text-lg">
               <span className="font-extrabold text-xl dark:text-white text-[#222]">
-                Welcome, friend.
+                Hi, I’m Moustafa.
               </span>{" "}
-              I’m <span className="font-bold">Moustafa Elsaqqa</span>, a
-              freelance <span className="font-bold">Web Developer</span> who
-              specializes in{" "}
+              I’m a <span className="font-bold">front-end developer</span> from
+              Menoufia, Egypt. I build clean, responsive web apps with{" "}
               <span className="font-bold text-blue-600 dark:text-blue-400">
-                front-end development
+                React, JavaScript and Tailwind CSS
               </span>
-              . I create modern, fast, and beautiful digital experiences from
-              scratch — blending design, performance, and code craftsmanship.
+              .
             </p>
 
             <p>
-              I’ve worked with startups, agencies, and established tech
-              companies to build scalable React and Next.js applications. I’m
-              passionate about creating web interfaces that are both{" "}
-              <span className="font-bold">intuitive</span> and{" "}
-              <span className="font-bold">highly performant</span>.
+              I learned front-end development through training and by building
+              real projects. Everything in this portfolio is something I built
+              myself, and each project links to a live demo and its code on
+              GitHub.
             </p>
 
             <p>
-              My expertise includes animation, micro-interactions, data
-              visualization, and delivering pixel-perfect implementations from
-              Figma or design systems like MUI. I’m also experienced in managing
-              complex app states, optimizing rendering, and improving UX flow.
-            </p>
-
-            <p>
-              Beyond coding, I love exploring creative technology — from 3D
-              graphics with Three.js to interactive storytelling on the web.
+              My projects include an e-commerce store with sign-in, cart and
+              checkout, a CRUD dashboard, a recipe finder, a weather app and a
+              random quotes generator. I care about readable code, responsive
+              layouts and interfaces that are easy to use.
             </p>
 
             <p className="font-semibold text-[#222222] dark:text-[#F4EFED] mt-4">
-              If you’re looking for a React/Next.js developer who can turn your
-              vision into a polished, high-quality experience — let’s build
-              something great together 🚀
+              I’m open to junior front-end roles and freelance work. If you have
+              a page or a small app to build, get in touch.
             </p>
           </motion.div>
         </div>
 
-        {/* Clients Section */}
+        {/* What I work with */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -100,26 +91,21 @@ const About = () => {
           className="mt-16"
         >
           <h2 className="text-2xl md:text-3xl font-extrabold mb-6 text-[#222222] dark:text-[#F4EFED]">
-            My Clients Include:
+            What I Can Help With
           </h2>
           <ul className="list-disc pl-6 space-y-4 text-gray-700 dark:text-gray-300">
             <li>
-              <strong>Startups & Small Businesses:</strong> Robust, scalable web
-              apps built with React and Tailwind — from landing pages to complex
-              dashboards.
+              <strong>Responsive web pages:</strong> landing pages and small
+              sites built with React and Tailwind CSS that work on phones and
+              desktops.
             </li>
             <li>
-              <strong>Design Agencies:</strong> Pixel-perfect conversions from
-              Figma/Sketch with strong focus on performance and accessibility.
+              <strong>Design to code:</strong> turning a ready design into a
+              clean React page.
             </li>
             <li>
-              <strong>Tech Companies & SaaS Providers:</strong> Interactive
-              interfaces, real-time data updates, and seamless user experience
-              with React + Next.js.
-            </li>
-            <li>
-              <strong>Nonprofits & Charities:</strong> Affordable, accessible
-              websites that empower their mission and community reach.
+              <strong>Data-driven interfaces:</strong> dashboards, forms and
+              lists that talk to an API, like my CRUD dashboard and store.
             </li>
           </ul>
         </motion.div>
@@ -132,8 +118,7 @@ const About = () => {
           viewport={{ once: true }}
           className="mt-12 text-center text-gray-600 dark:text-gray-400 italic"
         >
-          “Every line of code should tell a story — clean, purposeful, and
-          inspiring.”
+          “Keep it simple, make it work, then make it nice.”
         </motion.p>
       </div>
     </section>
