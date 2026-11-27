@@ -2,14 +2,14 @@ import React from "react";
 import Slider from "react-slick";
 import { motion } from "framer-motion";
 
-import daniels from "../../assets/images/danielsProj.png";
+import daniels from "../../assets/images/danielsProj.jpg";
 import crud from "../../assets/images/crudProj.png";
 import ecommerce from "../../assets/images/e-commerceWep.png";
-import first from "../../assets/images/firstReact.png";
+import first from "../../assets/images/firstReact.jpg";
 import random from "../../assets/images/randomQuote.png";
 import recipe from "../../assets/images/recipeProj.png";
-import smart from "../../assets/images/smartLogin.png";
-import weather from "../../assets/images/weatherProj.png";
+import smart from "../../assets/images/smartLogin.jpg";
+import weather from "../../assets/images/weatherProj.jpg";
 
 export default function HomeSlider() {
   const projects = [
