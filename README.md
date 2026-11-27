@@ -1,8 +1,27 @@
-# React + Vite
+# ElsaQa Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+My personal portfolio website, built to present my skills and projects.
 
-Currently, two official plugins are available:
+**Live demo:** https://mostafa-98.github.io/ElsaQaPortfolio/#/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Built with
+
+React, Vite, Tailwind CSS, JavaScript
+
+## Features
+
+- Single-page React app
+- Responsive layout styled with Tailwind CSS
+
+## Run locally
+
+```bash
+git clone https://github.com/Mostafa-98/ElsaQaPortfolio.git
+cd ElsaQaPortfolio
+npm install
+npm run dev
+```
+
+## Author
+
+Mostafa ElsaQa, Junior Front-End Developer. [GitHub](https://github.com/Mostafa-98) | [LinkedIn](https://www.linkedin.com/in/moustafa-elsaqqa/)
